@@ -1,0 +1,31 @@
+{
+  "categories": [
+    
+    { "name": "Men's clothing", "image": "../../category/menscloth.png" },
+    { "name": "Women's clothing", "image": "../../category/womenscloth.png" },
+    { "name": "Jewelery", "image": "../../category/jewellary.png" },
+    { "name": "Electronics", "image": "../../category/electronic.png" },
+    { "name": "Dairy, Bread & Eggs", "image": "../../category/category-1.jpg" },
+    { "name": "Snack & Munchies", "image": "../../category/category-2.jpg" },
+    { "name": "Bakery & Biscuits", "image": "../../category/category-3.jpg" },
+    { "name": "Instant Food", "image": "../../category/category-4.jpg" },
+    { "name": "Tea, Coffee & Drinks", "image": "../../category/category-5.jpg" },
+    { "name": "Atta, Rice & Dal", "image": "../../category/category-atta-rice-dal.jpg" },
+    { "name": "Baby Care", "image": "../../category/category-baby-care.jpg" },
+    { "name": "Chicken, Meat & Fish", "image": "../../category/category-chicken-meat-fish.jpg" },
+    { "name": "Cleaning Essentials", "image": "../../category/category-cleaning-essentials.jpg" },
+    { "name": "Pet Care", "image": "../../category/category-pet-care.jpg" }
+  ],
+  "products": [
+    { "name": "Haldiram's Sev Bhujia", "category": "Snack & Munchies", "price": 18, "img": "../../products/product-img-1.jpg" },
+    { "name": "NutriChoice Digestive", "category": "Bakery & Biscuits", "price": 24, "img": "../../products/product-img-2.jpg" },
+    { "name": "Cadbury 5 Star Chocolate", "category": "Bakery & Biscuits", "price": 32, "img": "../../products/product-img-3.jpg" },
+    { "name": "Onion Flavour Potato", "category": "Snack & Munchies", "price": 3, "img": "../../products/product-img-4.jpg" },
+    { "name": "Salted Instant Popcorn", "category": "Instant Food", "price": 13, "img": "../../products/product-img-5.jpg" },
+    { "name": "Blueberry Greek Yogurt", "category": "Dairy, Bread & Eggs", "price": 18, "img": "../../products/product-img-6.jpg" },
+    { "name": "Britannia Cheese Slices", "category": "Dairy, Bread & Eggs", "price": 24, "img": "../../products/product-img-7.jpg" },
+    { "name": "Kellogg's Original Cereals", "category": "Instant Food", "price": 32, "img": "../../products/product-img-8.jpg" },
+    { "name": "Slurrp Millet Chocolate", "category": "Snack & Munchies", "price": 3, "img": "../../products/product-img-9.jpg" },
+    { "name": "Amul Butter - 500 g", "category": "Dairy, Bread & Eggs", "price": 13, "img": "../../products/product-img-10.jpg" }
+  ]
+} 
