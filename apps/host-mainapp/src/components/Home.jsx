@@ -29,12 +29,7 @@ const Home = () => {
         <Banner />
         
         <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            <Route
-              path="/products/*"
-              element={<ProductApp />}
-            />
-          </Routes>
+          <ProductApp />
         </Suspense>
         <AppFeatures /> 
     </>

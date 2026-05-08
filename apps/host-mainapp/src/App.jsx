@@ -2,6 +2,8 @@
 // import Carosuel from "./Carosuel";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
+import { lazy,Suspense } from "react";
+
 // import { ErrorBoundary } from 'react-error-boundary'
 // import ErrorFallback from "./components/Error/ErrorFallback";
 // import MyErrorBoundary from "./components/Error/MyErrorBoundary";
@@ -18,7 +20,7 @@ import ContactUs from "./components/ContactUs";
 // import AppFeatures from "./components/AppFeatures";
 // const categories = data.categories;
 // const products = data.products;
-
+const ProductApp = lazy(()=> import('product/ProductApp'))
 function App() {
   // const  greeting = import.meta.env.VITE_GREETING;
 
@@ -30,7 +32,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<ContactUs />} />
-          {/* <Route path="/products/*" element={<ProductApp />} /> */}
+          <Route path="/products/*" element={<ProductApp />} />
           {/* <Route path="product/:id" element={<SingleProduct />} /> */}
         </Route>
       </Routes>
