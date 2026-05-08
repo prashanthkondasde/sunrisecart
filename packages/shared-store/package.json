@@ -1,0 +1,35 @@
+{
+  "name": "@srcart/shared-store",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+
+  "main": "./src/index.jsx",
+  "module": "./src/index.jsx",
+
+  "exports": {
+    ".": "./src/index.jsx",
+    "./store": "./src/store.jsx",
+    "./cartSlice": "./src/slices/cartSlice.jsx",
+    "./productSlice": "./src/slices/productSlice.jsx"
+  },
+
+  "files": [
+    "src"
+  ],
+
+  "scripts": {
+    "dev": "vite",
+    "build": "echo 'shared-store build complete'",
+    "lint": "eslint .",
+    "test": "vitest",
+    "preview": "vite preview"
+  },
+
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-redux": "^9.2.0",
+    "@reduxjs/toolkit": "^2.11.2"
+  }
+}
