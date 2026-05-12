@@ -12,7 +12,7 @@ function App() {
       <Route index element={<Products />} />
 
       <Route
-        path=":id"
+        path="product/:id"
         element={<ProductDetails />}
       />
     </Routes>

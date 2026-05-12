@@ -5,6 +5,18 @@ import Footer   from './shared/Footer';
 import CartDrawer from './shared/CartDrawer';  
 const Layout = () => {
 const [cartOpen, setCartOpen] = useState(false);
+// useEffect(() => {
+//   const initializeAuth = async () => {
+//       try {
+//         const response =await apiClient.me();
+//         setTokens(response.accessToken,response.csrfToken);
+//         setUser(response.user);
+//       } catch (error) {
+//         console.log("No active session",error);
+//       }
+//     };
+//   initializeAuth();
+// }, []);
   return (
     <>
         <Navbar onCartClick={() => setCartOpen(true)} />
@@ -12,7 +24,7 @@ const [cartOpen, setCartOpen] = useState(false);
         <main>
             <Outlet/>
         </main>
-        <Footer />  
+        <Footer/>  
     </>
   )
 }

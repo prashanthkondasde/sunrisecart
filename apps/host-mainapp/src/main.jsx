@@ -2,11 +2,10 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import MyErrorBoundary from './components/Error/MyErrorBoundary.jsx';
-// import './assets/tailwind/tailwind.css'
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import './assets/css/theme.css'
+import '@srcart/shared-ui/styles/globals.css'
+import '@srcart/shared-ui/styles/theme.css'
+
 import App from './App.jsx'
 import { Provider } from 'react-redux';
 //import store from './components/redux/store.jsx'; 

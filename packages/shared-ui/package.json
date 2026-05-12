@@ -1,0 +1,20 @@
+{
+  "name": "@srcart/shared-ui",
+
+  "version": "1.0.0",
+
+  "private": true,
+
+  "main": "./src/index.jsx",
+
+  "exports": {
+    ".": "./src/index.jsx",
+    "./styles/globals.css": "./src/styles/globals.css",
+    "./styles/theme.css": "./src/styles/theme.css"
+    },
+
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

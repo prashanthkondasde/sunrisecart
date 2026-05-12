@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaRegHeart, FaRegUser } from "react-icons/fa";
 import sunrise from "../../assets/images/logo/sunrise-cart-logo.png";
 import { useSelector } from 'react-redux';
+import { Button } from "@srcart/shared-ui";
 const Navbar = ({onCartClick, cartItems=[]}) => {
     // const [menuOpen, setMenuOpen] = useState(false);
 	const cartLength = useSelector((state) => state.cart.items.length);
+	const user = useSelector((state)=>state.auth);
   const [userOpen, setUserOpen] = useState(false);
-
-  const isLoggedIn = true;
-  const username = "Prashanth";
+console.log(user);
+//   const isLoggedIn = true;
+//   const username = "Prashanth";
 
 
   return (
@@ -87,13 +89,14 @@ const Navbar = ({onCartClick, cartItems=[]}) => {
 							</div>
 
 							{/* User */}
+							<Link to="/login"><Button>Login</Button></Link>
 							<div className="relative">
 								<div
 								className="flex items-center gap-2 cursor-pointer"
 								onClick={() => setUserOpen(!userOpen)}
 								>
 								<FaRegUser size={20}/>
-								{isLoggedIn && <span>{username}</span>}
+								{user?.user.isAuthenticated && <span>{user?.user.first_name}</span>}
 								</div>
 
 								{/* Dropdown */}

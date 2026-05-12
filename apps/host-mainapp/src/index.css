@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@source "../catalog-mfe/src";
+@source "../shared-ui/src";
 /* :root {
   --text: #6b6375;
   --text-h: #08060d;

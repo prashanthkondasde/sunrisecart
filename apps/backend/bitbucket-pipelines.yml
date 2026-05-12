@@ -1,0 +1,16 @@
+#  Template NodeJS build
+
+#  This template allows you to validate your NodeJS code.
+#  The workflow allows running tests and code linting on the default branch.
+
+image: node:16
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: 'Deploy'
+          script:
+            - apt-get update
+            - apt-get install sshpass -y
+            - sshpass -p "$PASSWORD" ssh -o stricthostkeychecking=no root@64.227.157.224  '/root/inval/inval-back/runner.sh </dev/null >/var/log/inval-back.log 2>&1 &'

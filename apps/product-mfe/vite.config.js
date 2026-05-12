@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import federation from '@originjs/vite-plugin-federation'
-import tailwindcss  from  '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(),
@@ -10,6 +9,7 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       exposes: {
         './ProductApp': './src/components/Products.jsx',
+        './ProductDetails': './src/components/ProductDetails.jsx',
       },
       shared: {
         react: {
@@ -49,29 +49,17 @@ export default defineConfig({
         }
       },
     },
-    tailwindcss()
   ],
   server:  {
-    port: 3002,
-    strictPort: true,
-    //  host: true,
-     cors: true,
-      headers: {
-      "Access-Control-Allow-Origin": "*",
-    },
+     cors: true
   },
   preview: {
-    port: 3002,
-    strictPort: true,
-    host: true,
-    cors: true, 
-    
+    cors: true,    
   },   
   build: {
     outDir: 'dist',
     modulePreload: false,
     target: 'esnext',
     minify: false,
-    cssCodeSplit: false,
   },
   })

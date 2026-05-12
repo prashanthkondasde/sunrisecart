@@ -1,9 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import '@srcart/shared-ui/styles/globals.css'
+import '@srcart/shared-ui/styles/theme.css'
 import App from './App.jsx'
 // import MyErrorBoundary from './components/Error/MyErrorBoundary.jsx';
 import { BrowserRouter } from "react-router-dom";

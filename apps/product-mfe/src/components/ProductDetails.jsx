@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { fetchProductById } from "@srcart/shared-store";
 import { addToCart,updateQuantity } from "@srcart/shared-store";
+import {Button} from "@srcart/shared-ui";
 const  ProductDetails = () =>{
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -215,9 +216,7 @@ const { items, selectedProduct, loading } = useSelector(
                     </div>
                     <div className="flex flex-wrap justify-start gap-2 items-center">
                       <div className="lg:w-1/3 md:w-2/5 w-full grid">
-                        {/*<!-- button */}
-                        {/*<!-- btn */}
-                        <button type="button"
+                        <Button type="button"  onClick={()=>dispatch(addToCart(product))}
                           className="btn gap-x-1 bg-green-600 text-white border-green-600 disabled:opacity-50 disabled:pointer-events-none hover:text-white hover:bg-green-700 hover:border-green-700 active:bg-green-700 active:border-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 justify-center">
                           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -229,7 +228,7 @@ const { items, selectedProduct, loading } = useSelector(
                             <path d="M9 11v-5a3 3 0 0 1 6 0v5" />
                           </svg>
                           Add to cart
-                        </button>
+                        </Button>
                       </div>
                       <div className="md:w-1/3 w-full">
                         {/*<!-- btn */}

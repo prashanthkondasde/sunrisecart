@@ -1,11 +1,10 @@
-import { Routes,Route } from "react-router-dom";
 import { lazy,Suspense } from "react";
-import MainSlider from "./MainSlider";
+import MainSlider from "../components/MainSlider";
 import { useEffect } from "react";
 import { fetchProducts } from "@srcart/shared-store";
 import { useDispatch } from "react-redux";
-import Banner from "./Banner";
-import AppFeatures from "./AppFeatures";  
+import Banner from "../components/Banner";
+import AppFeatures from "../components/AppFeatures";  
 // import {  store} from "@srcart/shared-store";
 const CatalogApp = lazy(() => import('catalog/CatalogApp'))
 const ProductApp = lazy(()=> import('product/ProductApp'))

@@ -11,7 +11,6 @@ const ProductItem = ({ product, isWished,handleWishlist }) => {
     <div className="relative rounded-lg break-words border bg-white border-gray-300 card-product">
                 <div className="flex-auto p-4  h-full">
                     <div className="w-full items-center justify-center">
-                        <div className="absolute top-0 left-0">
                             <div className="text-right absolute top-2 left-2">
                             <button
                               onClick={() => handleWishlist(product.id)}
@@ -25,7 +24,6 @@ const ProductItem = ({ product, isWished,handleWishlist }) => {
                               )}
                             </button>
                           </div>
-                        </div>
                         <Link to={`/product/${id}`}><img src={thumbnail} alt={title} className="max-h-full max-w-full object-contain mt-3" /></Link>
                     </div>
                     <div className="flex flex-col gap-3">
