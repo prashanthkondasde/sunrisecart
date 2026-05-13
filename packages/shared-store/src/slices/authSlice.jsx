@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const authSlice =createSlice({
     name:"auth",
-    initialState = {
+    initialState:{
     accessToken: null,
     csrfToken: null,
     user: null,
@@ -12,7 +12,7 @@ const authSlice =createSlice({
         setAuth:(state,action)=>{
             state.accessToken = action.payload.accessToken;
             state.csrfToken = action.payload.csrfToken;
-            state.currentuser = action.payload.user;
+            state.user = action.payload.user;
             state.isAuthenticated = true;
             state.isLoading = false;
         },

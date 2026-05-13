@@ -1,40 +1,69 @@
 import axios from 'axios'
-import store from '@srcart/shared-store/store'
-const apiUrl = import.meta.env.VITE_API_URL
-export const apiClient =
-  axios.create({
-    baseURL:apiUrl,
-    withCredentials: true
-  })
-let accessToken = store.getState().auth.accessToken || null;
-let csrfToken = store.getState().auth.csrfToken || null;
+import {store} from '@srcart/shared-store/store'
 
-// export const setTokens = (access,csrf) =>{
-//   accessToken = access;
-//   csrfToken = csrf;
-// }
+import { getApiConfig } from './config'
 
-apiClient.interceptors.request.use(
-  config => {
-    if(accessToken){
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
-    if (csrfToken) {config.headers['X-CSRF-Token'] = csrfToken
-    }
-    return config
+export const apiClient = axios.create({
+  withCredentials: true,
+})
+
+apiClient.interceptors.request.use((config) => {
+  const { apiUrl } = getApiConfig()
+
+  config.baseURL = apiUrl
+
+  const accessToken = store.getState().auth.accessToken
+  const csrfToken = store.getState().auth.csrfToken
+
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`
   }
-)
+
+  if (csrfToken) {
+    config.headers['X-CSRF-Token'] = csrfToken
+  }
+
+  return config
+})
 
 apiClient.interceptors.response.use(
-  response => response,
-  async error => {
+  (response) => response,
+
+  async (error) => {
     const originalRequest = error.config
 
-    if (error.response?.status ===401 && !originalRequest._retry) {
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry
+    ) {
       originalRequest._retry = true
-      await apiClient.post('/auth/refresh')
-      accessToken = response.data.accessToken
-      return apiClient(originalRequest)
+
+      try {
+        const { apiUrl } = getApiConfig()
+
+        const response = await axios.post(
+          `${apiUrl}/auth/refresh`,
+          {},
+          { withCredentials: true }
+        )
+
+        store.dispatch(
+          setAuth({
+            user: response.data.user,
+            accessToken: response.data.accessToken,
+            csrfToken: response.data.csrfToken,
+          })
+        )
+
+        originalRequest.headers.Authorization =
+          `Bearer ${response.data.accessToken}`
+
+        return apiClient(originalRequest)
+
+      } catch (err) {
+        store.dispatch(clearAuth())
+        window.location.href = '/login'
+      }
     }
 
     return Promise.reject(error)

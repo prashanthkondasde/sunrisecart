@@ -5,10 +5,10 @@
 
   "private": true,
 
-  "main": "./src/index.jsx",
+  "main": "./src/index.js",
 
   "exports": {
-    ".": "./src/index.jsx",
+    ".": "./src/index.js",
     "./styles/globals.css": "./src/styles/globals.css",
     "./styles/theme.css": "./src/styles/theme.css"
     },

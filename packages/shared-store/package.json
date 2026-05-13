@@ -4,12 +4,12 @@
   "private": true,
   "type": "module",
 
-  "main": "./src/index.jsx",
-  "module": "./src/index.jsx",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
 
   "exports": {
-    ".": "./src/index.jsx",
-    "./store": "./src/store.jsx",
+    ".": "./src/index.js",
+    "./store": "./src/store.js",
     "./cartSlice": "./src/slices/cartSlice.jsx",
     "./productSlice": "./src/slices/productSlice.jsx"
   },

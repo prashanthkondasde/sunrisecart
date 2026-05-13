@@ -1,19 +1,35 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaRegHeart, FaRegUser } from "react-icons/fa";
 import sunrise from "../../assets/images/logo/sunrise-cart-logo.png";
 import { useSelector } from 'react-redux';
 import { Button } from "@srcart/shared-ui";
+import {useAuth} from "@srcart/shared-auth"
+import { authApi } from '@srcart/shared-api';
+import { useDispatch } from 'react-redux';
+import { clearAuth } from '@srcart/shared-store';
 const Navbar = ({onCartClick, cartItems=[]}) => {
     // const [menuOpen, setMenuOpen] = useState(false);
 	const cartLength = useSelector((state) => state.cart.items.length);
-	const user = useSelector((state)=>state.auth);
-  const [userOpen, setUserOpen] = useState(false);
-console.log(user);
-//   const isLoggedIn = true;
-//   const username = "Prashanth";
+	const {user,isAuthenticated} = useAuth();
+  	const [userOpen, setUserOpen] = useState(false);
+// console.log("user",user);
+// console.log(isAuthenticated);
+const dispatch = useDispatch();
+const navigate = useNavigate();
 
-
+const handleLogout = async event => {
+	event.preventDefault()
+	try {
+	  const response = await authApi.logout();
+	  if(response.success){
+	   dispatch(clearAuth());
+		navigate("/login", {replace: true });
+		}
+	} catch(error) {
+	  alert('Unable to Logout', error)
+	}
+  }
   return (
 	<header>
 	<div className="bg-gray-100 py-1">
@@ -89,27 +105,31 @@ console.log(user);
 							</div>
 
 							{/* User */}
-							<Link to="/login"><Button>Login</Button></Link>
-							<div className="relative">
+							{!isAuthenticated ? <Link to="/login"><Button className='p-2'>Login</Button></Link> : ''}
+							{isAuthenticated && (<div className="relative">
 								<div
 								className="flex items-center gap-2 cursor-pointer"
 								onClick={() => setUserOpen(!userOpen)}
 								>
 								<FaRegUser size={20}/>
-								{user?.user.isAuthenticated && <span>{user?.user.first_name}</span>}
+								<span>{user?.first_name}</span>
 								</div>
 
 								{/* Dropdown */}
-								{userOpen && (
-								<div className="absolute right-0 mt-2 w-40 bg-white shadow rounded p-2">
+								
+								{userOpen && (<div className="absolute right-0 mt-2 w-40 bg-white shadow rounded p-2">
 									<p className="p-2 hover:bg-gray-100 cursor-pointer">Profile</p>
 									<p className="p-2 hover:bg-gray-100 cursor-pointer">Settings</p>
-									<p className="p-2 hover:bg-gray-100 cursor-pointer text-red-500">
-									Logout
-									</p>
+									 <button
+										onClick={handleLogout}
+										className="w-full text-right p-2 hover:bg-gray-100 cursor-pointer text-red-500"
+									>
+										Logout
+									</button>
 								</div>
 								)}
 							</div>
+							)}
 							<div className="lg:hidden leading-none">
 								<button className="collapsed" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbar-default"
 									aria-controls="navbar-default" aria-label="Toggle navigation">

@@ -112,19 +112,49 @@ export async function login(payload) {
 }
 
 export async function refreshtoken(rtoken) {
+  // console.log("service",rtoken)
   if (!rtoken) {
       return res.status(401).json({
+        success: false,
         message: 'Unauthorized'
       })
-      }
-
+    }
     const decoded = verifyRefreshToken(rtoken)
+    const result =  await pool.query(`SELECT
+      u.id,
+      u.first_name,
+      u.last_name,
+      u.email,
+      u.phone,
+      u.role_id,
+      u.password_hash,
+      r.name AS role
+    FROM users u
+    LEFT JOIN roles r  ON u.role_id = r.id
+    WHERE u.id = $1`,[decoded.id])
+  const user =  result.rows[0];
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+      })
+    }
+    
     return {
-      newtoken:{
-          accessToken:generateAccessToken({
-          id: user.id,
-          role: user.role
-        }),
-      }
+      user: {
+      id: user.id,
+      first_name: user.first_name,
+      last_name:user.last_name,
+      email: user.email,
+      phone: user.phone,
+      role: user.role
+    },
+    accessToken:generateAccessToken({
+      id: user.id,
+      role: user.role,
+    }),
+    // refreshToken:generateRefreshToken({
+    //     id: user.id
+    //   }),
+      csrfToken:generateCsrfToken()
     }
 }

@@ -1,8 +1,7 @@
-import {apiClient, setTokens} from '../apiClient'
+import {apiClient} from '../apiClient'
 export const authApi = {
   login: async payload => {
     const response = await apiClient.post('/auth/login',payload)
-    // setTokens(response.data.accessToken,response.data.csrfToken);
     return response.data
   },
 
@@ -11,8 +10,9 @@ export const authApi = {
     return response.data
   },
 
-  me: async () => {
-    const response = await apiClient.get('/auth/me')
+  refresh: async () => {
+    const response = await apiClient.post('/auth/refresh')
+    // console.log("etete",response.data);
     return response.data
   }
 }

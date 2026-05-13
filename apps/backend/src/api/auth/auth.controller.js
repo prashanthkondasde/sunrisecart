@@ -55,23 +55,23 @@ const login = async (req, res) => {
 const logout = async(req,res)=>{
   res.clearCookie('refresh_token');
   res.clearCookie('csrf_token');
+  return res.status(200).json({
+    success: true,
+    message: 'Logged out successfully',
+  })
 }
 const refreshAccessToken = async (req,res)=>{
+  // console.log("rtoken",req.cookies.refresh_token);
   try {
-    const refreshToken = await authService.refreshtoken(req.cookies.refresh_token);
-    res.status(201).json({
-        success: true,
-        newtoken
-      })
+    const data = await authService.refreshtoken(req.cookies.refresh_token);
+    // console.log("refreshdata",data);
+    res.json({success: true,csrfToken:data.csrfToken,accessToken:data.accessToken,user: data.user})
     } catch (error) {
       res.status(401).json({
         success: false,
         message: error.message //Invalid refresh token
       })
     }
-}
-const getCurrentUser = async(req,res)=>{
-  
 }
 const googleSignin = async (req, res) => {
   console.log(req.body);
@@ -269,4 +269,5 @@ export {
   updateUserProfile,
   getUserProfile,
   activityLogs,
+  logout
 };
