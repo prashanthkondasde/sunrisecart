@@ -3,10 +3,14 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import {Link} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@srcart/shared-store";
+import { usePermission } from "@srcart/shared-auth";
 // import ItemRating from "./ItemRating";
 const ProductItem = ({ product, isWished,handleWishlist }) => {
     const dispatch = useDispatch();
   const { id,category,title,brand,rating,price,thumbnail } = product;
+    //check permsion for add cart button based on user role;
+  const canAddToCart = usePermission('cart:add')
+
   return (
     <div className="relative rounded-lg break-words border bg-white border-gray-300 card-product">
                 <div className="flex-auto p-4  h-full">
@@ -47,6 +51,7 @@ const ProductItem = ({ product, isWished,handleWishlist }) => {
                                 <span className="text-gray-900 font-semibold">${price.toFixed(2)}</span>
                                 <span className="line-through text-gray-500"> ${(price * 1.2).toFixed(2)}</span>
                             </div>
+                            {canAddToCart && (
                             <div>
                                 <button type="button" onClick={()=>dispatch(addToCart(product))}
                                     className="btn inline-flex items-center gap-x-1 bg-green-600 text-white border-green-600 disabled:opacity-50 disabled:pointer-events-none hover:text-white hover:bg-green-700 hover:border-green-700 active:bg-green-700 active:border-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 btn-sm">
@@ -60,6 +65,7 @@ const ProductItem = ({ product, isWished,handleWishlist }) => {
                                     <span>Add</span>
                                 </button>
                             </div>
+                            )}
                         </div>
                     </div>
                 </div>

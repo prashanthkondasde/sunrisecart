@@ -12,6 +12,12 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import ContactUs from "./pages/ContactUs";
 import Login from "./pages/auth/Login"
+import Register from "./pages/auth/Register"
+import Product from "./pages/admin/Product";
+import Unauthorized from "./components/shared/Unauthorized";
+import Pagenotfound from "./components/shared/Pagenotfound";
+import {PublicRoute,ProtectedRoute,RoleGuard} from "@srcart/shared-auth";
+import { ROLES } from "@srcart/shared-auth";
 // import SingleProduct from "./components/SingleProduct";
 // import CartDrawer from "./components/CartDrawer";
 // import MainSlider from "./components/MainSlider";
@@ -34,8 +40,29 @@ function App() {
         <Route path="/" element={<Layout />}>   
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="login" element={<Login />} />
-          <Route path="contact" element={<ContactUs />} />
+          {/* Prevent logged-in users from seeing:login,regster,forgotpwd */}
+          <Route element={<PublicRoute />}>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+          {/* Protect private pages: */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="contact" element={<ContactUs />} />
+          </Route>  
+          {/* Restrict pages by role.admin,vendor,customer   
+            when product route run 
+            it will go to RoleGuard and pass ROLES.CUSTOMER:"customer" Value
+            In ROleGuard it will check with useAUth of role value
+            if allowedRoles consist useAuth user role value
+            it will give access, else not          
+            if multiple roles allowedRoles={["admin","manager"]} OR
+            allowedRoles={[ROLES.ADMIN,ROLES.CUSTOMER]}
+          */}
+          <Route path="/product" element={<RoleGuard
+            allowedRoles={[ROLES.ADMIN]}>
+            <Product />
+          </RoleGuard>}>
+          </Route>  
            <Route
             path="product/:id"
             element={
@@ -44,7 +71,9 @@ function App() {
               </Suspense>
             }
           />
-        </Route>
+          </Route>
+          <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route path="*" element={<Pagenotfound />} />
       </Routes>
     </BrowserRouter>
 </>

@@ -1,7 +1,5 @@
 export const ROLES = {
-  ADMIN: 'admin',
-
-  CUSTOMER: 'customer',
-
-  MANAGER: 'manager'
+  ADMIN: 'ADMIN',//value should match with db role 
+  CUSTOMER: 'CUSTOMER',
+  MANAGER: 'MANAGER'
 }

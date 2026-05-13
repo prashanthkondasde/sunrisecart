@@ -1,21 +1,21 @@
-import { Navigate }
+import { Navigate, Outlet }
 from 'react-router-dom'
 
 import { useAuth }
 from '../hooks/useAuth'
 
-export default function PublicRoute({
-  children
-}) {
+export const PublicRoute = ()=>{
   const {
-    isAuthenticated
+    isAuthenticated,isLoading
   } = useAuth()
-
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   if (isAuthenticated) {
     return (
-      <Navigate to="/" />
+      <Navigate to="/" replace/>
     )
   }
 
-  return children
+  return <Outlet/>
 }

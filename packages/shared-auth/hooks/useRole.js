@@ -1,13 +1,8 @@
-import { useAuth }
-from './useAuth'
+import { useAuth } from './useAuth'
 
-import { hasRole }
-from '../utils/hasRole'
+import { hasRole } from '../utils/hasRole'
 
-export function useRole(
-  roles = []
-) {
+export function useRole(roles = []) {
   const { user } = useAuth()
-
   return hasRole(user, roles)
 }

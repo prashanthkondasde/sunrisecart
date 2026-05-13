@@ -28,7 +28,6 @@ app.use(cors({
       callback(new Error(`CORS blocked: ${origin}`))
     }
   },
-
   credentials: true,
 }))
 //app.use(fileupload());

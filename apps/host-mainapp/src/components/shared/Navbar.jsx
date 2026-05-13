@@ -13,7 +13,7 @@ const Navbar = ({onCartClick, cartItems=[]}) => {
 	const cartLength = useSelector((state) => state.cart.items.length);
 	const {user,isAuthenticated} = useAuth();
   	const [userOpen, setUserOpen] = useState(false);
-// console.log("user",user);
+console.log("user",user);
 // console.log(isAuthenticated);
 const dispatch = useDispatch();
 const navigate = useNavigate();

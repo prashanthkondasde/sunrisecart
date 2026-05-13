@@ -1,7 +1,8 @@
 import axios from 'axios'
 import {store} from '@srcart/shared-store/store'
-
+// import { clearAuth } from '@srcart/shared-store'
 import { getApiConfig } from './config'
+// import { authApi,setApiConfig } from '@srcart/shared-api'
 
 export const apiClient = axios.create({
   withCredentials: true,
@@ -34,7 +35,8 @@ apiClient.interceptors.response.use(
 
     if (
       error.response?.status === 401 &&
-      !originalRequest._retry
+      !originalRequest._retry &&
+  originalRequest.url !== '/auth/refresh'
     ) {
       originalRequest._retry = true
 
@@ -46,7 +48,6 @@ apiClient.interceptors.response.use(
           {},
           { withCredentials: true }
         )
-
         store.dispatch(
           setAuth({
             user: response.data.user,
@@ -61,8 +62,8 @@ apiClient.interceptors.response.use(
         return apiClient(originalRequest)
 
       } catch (err) {
-        store.dispatch(clearAuth())
-        window.location.href = '/login'
+        // store.dispatch(clearAuth())
+       //window.location.href = '/login'
       }
     }
 

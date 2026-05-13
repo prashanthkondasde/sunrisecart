@@ -1,5 +1,4 @@
-import { ROLES }
-from '../constants/roles'
+import { ROLES } from '../constants/roles'
 
 export const permissions = {
   [ROLES.ADMIN]: [
@@ -16,6 +15,7 @@ export const permissions = {
 
   [ROLES.CUSTOMER]: [
     'cart:add',
+    // 'product:create',
     'order:create'
   ]
 }
