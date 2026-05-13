@@ -61,10 +61,8 @@ const logout = async(req,res)=>{
   })
 }
 const refreshAccessToken = async (req,res)=>{
-  // console.log("rtoken",req.cookies.refresh_token);
   try {
     const data = await authService.refreshtoken(req.cookies.refresh_token);
-    // console.log("refreshdata",data);
     res.json({success: true,csrfToken:data.csrfToken,accessToken:data.accessToken,user: data.user})
     } catch (error) {
       res.status(401).json({
